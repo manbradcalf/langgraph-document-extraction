@@ -9,7 +9,7 @@ from template import html_template
 
 # Setup
 timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-pdf_path = "/Users/benmedcalf/code/segtax/python-poc/Executed Closing Statement (1).pdf"
+pdf_path = "example_settlement_statement.pdf"
 extracted_text = read_pdf(pdf_path)
 openai_model = models[1]
 system_prompt = """
