@@ -1,0 +1,106 @@
+name: settlement_statement
+description: Real estate settlement/closing statement
+
+schema_path: docextract.schemas.settlement_statement.SettlementStatement
+
+prompts:
+  system: |
+    You are a real estate settlement statement parser.
+    Extract all financial data accurately from settlement statements.
+
+    Guidelines:
+    - Extract all monetary amounts as decimal numbers
+    - Use ISO format for dates (YYYY-MM-DD)
+    - Categorize line items by type (payoffs, commissions, fees, taxes, etc.)
+    - Identify all parties (buyer, seller, lender if applicable)
+    - Extract all property addresses being transferred
+    - Be precise with debit/credit party assignments
+    - Include all adjustments and prorations
+
+  user: |
+    Parse the following real estate settlement statement and extract
+    all relevant structured data.
+
+    Document text:
+    {{ extracted_text }}
+
+    Extract complete settlement data including:
+    - Header information (title company, settlement date, order number, escrow officer)
+    - All parties involved (buyer, seller, lender)
+    - Property addresses
+    - Purchase price and earnest money deposit
+    - Loan details (if applicable)
+    - Payoffs (existing loans/liens)
+    - Real estate commissions
+    - Adjustments and prorations
+    - Lender fees
+    - Title and escrow fees
+    - Recording fees and transfer taxes
+    - Third party consultant fees
+    - Other items
+    - Financial totals (seller/buyer debits, credits, net proceeds, cash required)
+
+validation:
+  required_fields:
+    - title_company
+    - settlement_date
+    - order_number
+    - buyer
+    - seller
+    - properties
+    - purchase_price
+    - seller_total_debits
+    - seller_total_credits
+    - buyer_total_debits
+    - buyer_total_credits
+
+  custom_validators:
+    - totals_balance
+
+interpretation:
+  enabled: true
+  model: gpt-4o
+  temperature: 0
+  prompt: |
+    You are a tax professional categorizing settlement statement line items according to IRS Publication 551 (Basis of Assets).
+
+    Settlement Statement Data:
+    {{ parsed_data }}
+
+    Categorize ALL line items into these IRS Pub 551 categories:
+
+    1. **Costs Added to Basis** - title insurance, recording fees, transfer taxes, survey, legal fees, abstract fees
+    2. **Costs NOT Added to Basis** - fire insurance, occupancy rent, utility charges, loan charges
+    3. **Loan Settlement Fees (Potentially Deductible)** - points, mortgage insurance, prepaid interest
+    4. **Prorations** - property taxes, HOA dues, rent, utilities
+    5. **Seller's Costs** - commissions, advertising, seller legal fees
+
+    OUTPUT FORMAT: Return ONLY an HTML table with no other text. Use this exact structure:
+
+    <table class="pub551-table">
+      <thead>
+        <tr>
+          <th>Line Item</th>
+          <th>Amount</th>
+          <th>Pub 551 Category</th>
+          <th>Applies To</th>
+          <th>Justification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- One row per line item -->
+      </tbody>
+      <tfoot>
+        <tr><td colspan="5"><strong>Category Totals</strong></td></tr>
+        <tr><td colspan="3">Costs Added to Basis (Buyer)</td><td colspan="2">$X,XXX.XX</td></tr>
+        <tr><td colspan="3">Costs Not Added to Basis</td><td colspan="2">$X,XXX.XX</td></tr>
+        <tr><td colspan="3">Loan Settlement Fees</td><td colspan="2">$X,XXX.XX</td></tr>
+        <tr><td colspan="3">Prorations</td><td colspan="2">$X,XXX.XX</td></tr>
+        <tr><td colspan="3">Seller's Costs</td><td colspan="2">$X,XXX.XX</td></tr>
+      </tfoot>
+    </table>
+
+llm:
+  model: gpt-4o
+  temperature: 0
+  max_retries: 2

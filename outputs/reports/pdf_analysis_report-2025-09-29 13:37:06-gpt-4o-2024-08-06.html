@@ -1,0 +1,2448 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PDF Analysis Report - settlement_agreement.pdf</title>
+        <script src="https://cdn.jsdelivr.net/npm/diff2html@3.4.47/bundles/js/diff2html-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/diff2html@3.4.47/bundles/css/diff2html.min.css" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                overflow: hidden;
+            }
+            .header {
+                background-color: #2c3e50;
+                color: white;
+                padding: 20px;
+                text-align: center;
+            }
+            .content {
+                display: flex;
+                min-height: 800px;
+            }
+            .pdf-section {
+                flex: 1;
+                padding: 20px;
+                border-right: 2px solid #ecf0f1;
+            }
+            .data-section {
+                flex: 1;
+                padding: 20px;
+            }
+            .section-title {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 15px;
+                color: #2c3e50;
+                border-bottom: 2px solid #3498db;
+                padding-bottom: 5px;
+            }
+            .pdf-embed {
+                width: 100%;
+                height: 700px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            .tabs {
+                display: flex;
+                border-bottom: 2px solid #e9ecef;
+                margin-bottom: 15px;
+            }
+            .tab {
+                background-color: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-bottom: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                font-weight: bold;
+                margin-right: 5px;
+                border-radius: 4px 4px 0 0;
+            }
+            .tab.active {
+                background-color: #3498db;
+                color: white;
+                border-color: #3498db;
+            }
+            .tab-content {
+                display: none;
+            }
+            .tab-content.active {
+                display: block;
+            }
+            .parsed-data {
+                background-color: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-radius: 4px;
+                padding: 15px;
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                white-space: pre-wrap;
+                overflow-y: auto;
+                max-height: 600px;
+            }
+            .diff-container {
+                background-color: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-radius: 4px;
+                padding: 10px;
+                max-height: 600px;
+                overflow-y: auto;
+            }
+            .extracted-text {
+                background-color: #fff3cd;
+                border: 1px solid #ffeeba;
+                border-radius: 4px;
+                padding: 15px;
+                font-family: 'Courier New', monospace;
+                font-size: 11px;
+                white-space: pre-wrap;
+                overflow-y: auto;
+                max-height: 300px;
+                margin-top: 20px;
+            }
+            .metadata {
+                background-color: #e8f4fd;
+                border: 1px solid #bee5eb;
+                border-radius: 4px;
+                padding: 10px;
+                margin-bottom: 20px;
+                font-size: 12px;
+            }
+            .benchmark-data {
+                background-color: #f0f8f0;
+                border: 1px solid #d4edda;
+                border-radius: 4px;
+                padding: 15px;
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                white-space: pre-wrap;
+                overflow-y: auto;
+                max-height: 600px;
+            }
+            @media (max-width: 768px) {
+                .content {
+                    flex-direction: column;
+                }
+                .pdf-section {
+                    border-right: none;
+                    border-bottom: 2px solid #ecf0f1;
+                }
+                .tabs {
+                    flex-wrap: wrap;
+                }
+                .tab {
+                    margin-bottom: 5px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>PDF Analysis Report</h1>
+                <p>Generated on 2025-09-29 13:37:06</p>
+            </div>
+
+            <div class="content">
+                <div class="pdf-section">
+                    <div class="section-title">📄 Original PDF</div>
+                    <div class="metadata">
+                        <strong>File:</strong> settlement_agreement.pdf<br>
+                        <strong>Model:</strong> gpt-4o-2024-08-06<br>
+                        <strong>Processing Date:</strong> 2025-09-29 13:37:06
+                    </div>
+                    <iframe src="./outputs/reports/report_settlement_agreement.pdf"
+                            class="pdf-embed"
+                            type="application/pdf">
+                        <p>Your browser does not support PDFs.
+                           <a href="./outputs/reports/report_settlement_agreement.pdf">Download the PDF</a> to view it.</p>
+                    </iframe>
+                </div>
+
+                <div class="data-section">
+                    <div class="section-title">📊 Analysis Results</div>
+
+                    <div class="tabs">
+                        <div class="tab active" onclick="showTab('generated')">Generated JSON</div>
+                        <div class="tab" onclick="showTab('benchmark')">Benchmark JSON</div>
+                        <div class="tab" onclick="showTab('diff')">JSON Diff</div>
+                        <div class="tab" onclick="showTab('text')">Extracted Text</div>
+                    </div>
+
+                    <div id="generated" class="tab-content active">
+                        <div class="parsed-data">{
+  "title_company": "Chicago Title Insurance Company",
+  "settlement_date": "2025-05-29",
+  "order_number": "202500257VA",
+  "escrow_officer": "Debra Bond",
+  "buyer": {
+    "name": "1922 Varina Ave Owner, LLC",
+    "entity_type": "LLC",
+    "state_of_formation": "Delaware"
+  },
+  "seller": {
+    "name": "Petersburg Woodvale LP",
+    "entity_type": "LP",
+    "state_of_formation": "Virginia"
+  },
+  "lender": {
+    "name": "The Bancorp Bank, National Association",
+    "entity_type": null,
+    "state_of_formation": null
+  },
+  "properties": [
+    {
+      "street_address": "1909 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1911-1915 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1917 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1918-1922 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1924 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1015-1017 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1111-1115 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1913-1917 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1919-1923 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1925 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    }
+  ],
+  "purchase_price": 3050000.0,
+  "deposit": 150000.0,
+  "loan": {
+    "principal_amount": "3950000",
+    "closing_draw": "1905795",
+    "remaining_balance": "2044205",
+    "lender": "The Bancorp Bank, National Association",
+    "loan_type": null
+  },
+  "payoffs": [
+    {
+      "description": "Payoff to Virginia Housing (MF Clearing Account)",
+      "amount": "840033.45",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Payoff"
+    }
+  ],
+  "commissions": [
+    {
+      "description": "Broker Commission to Greysteel Holdings, LLC",
+      "amount": "98175",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Commission"
+    }
+  ],
+  "adjustments": [
+    {
+      "description": "RE Taxes 4th Quarter 2024-2025 Quarterly",
+      "amount": "6739.49",
+      "period_start": "2024-04-01",
+      "period_end": "2025-05-28",
+      "daily_rate": "116.198022",
+      "number_of_days": 58,
+      "allocated_to_seller": "6739.49",
+      "allocated_to_buyer": "6739.49"
+    },
+    {
+      "description": "Rents (5/29-5/31/25)",
+      "amount": "4924.04",
+      "period_start": "2025-05-29",
+      "period_end": "2025-05-31",
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "4924.04",
+      "allocated_to_buyer": "4924.04"
+    },
+    {
+      "description": "Security Deposits",
+      "amount": "30057.5",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "30057.5",
+      "allocated_to_buyer": "30057.5"
+    },
+    {
+      "description": "Prepaid Rents",
+      "amount": "2676.67",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "2676.67",
+      "allocated_to_buyer": "2676.67"
+    },
+    {
+      "description": "Rent Ready Credit",
+      "amount": "2600",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "2600",
+      "allocated_to_buyer": "2600"
+    },
+    {
+      "description": "Closing Credit per First Amendment to PSA",
+      "amount": "245000",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "245000",
+      "allocated_to_buyer": "245000"
+    },
+    {
+      "description": "Annual VHDA Fee Credit",
+      "amount": "1192.11",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "1192.11",
+      "allocated_to_buyer": "1192.11"
+    }
+  ],
+  "lender_fees": [
+    {
+      "description": "Application Deposit",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Application Fee to The Bancorp Bank, National Association",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Origination Fee to The Bancorp Bank, National Association",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Credit and OFAC Searches to The Bancorp Bank, National Association",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Taxes & Ins. withheld at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Total Stub Interest Due at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "4920.66",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Estimated I/O Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "13867.31",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Taxes & Insurance Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Roof/Gutter Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "160000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Asphalt Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Cash Flow Shortfall Reserve to CBRE Capital Markets Lockbox Clearing",
+      "amount": "169846",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Lender Legal Fees to A.Y. Strauss",
+      "amount": "23500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Appraisal and Review to Summer Street Advisors LLC",
+      "amount": "7850",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "PCA/ESA/Radon & Zoning Reports to Partner Assessment Corp.",
+      "amount": "13935",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Due Diligence Support to Exceder Real Estate Advisors LLC",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Insurance Review to Pillar Risk Partners LLC",
+      "amount": "4000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Outstanding Insurance Premium to Howard Insurance",
+      "amount": "48774",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Litigation/Lien Searches to Vcheck Global LLC",
+      "amount": "6800",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Huntington Springing DACA Fee to Huntington Bank (SMS Agreement Set Up Charges)",
+      "amount": "2000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    }
+  ],
+  "title_fees": [
+    {
+      "description": "Owner's Policy Premium",
+      "amount": "8295",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Loan Policy Premium",
+      "amount": "0",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Exam Fee",
+      "amount": "750",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Abstract Search Fee",
+      "amount": "475",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Copies",
+      "amount": "35",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Settlement Fee",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Closing Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Future Disbursement Updates/Endorsements (8 @ $75)",
+      "amount": "600",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Title Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    }
+  ],
+  "recording_taxes": [
+    {
+      "tax_type": "State Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "8326",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "2775.33",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "State Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "Local Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "State Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "9875",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "3291.67",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Estimated Recording/Service Fees - Deed & Loan Documents",
+      "basis_amount": null,
+      "tax_amount": "250",
+      "paid_by": "Buyer"
+    }
+  ],
+  "consultant_fees": [
+    {
+      "description": "ALTA Survey Fees to Shadrach & Associates LLC",
+      "amount": "6500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Legal Fees to Grossberg, Yochelson, Fox, & Beyda, LLP",
+      "amount": "65652.64",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Broker Fee to Northmarg Capital, LLC",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Q4 Real Estate Tax Payment to City of Petersburg Treasurer",
+      "amount": "10574.02",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    }
+  ],
+  "other_items": [
+    {
+      "description": "Judgment Lien Escrow to Post Closing Escrow (expires 10/10/2025)",
+      "amount": "12400.5",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    },
+    {
+      "description": "Closing Funds received 5/27/25",
+      "amount": "1000",
+      "debit_to": null,
+      "credit_to": "Buyer",
+      "category": "Other"
+    },
+    {
+      "description": "Seller Closing Proceeds to Community Housing Partners Corp.",
+      "amount": "1801370.74",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    }
+  ],
+  "seller_total_debits": 3050000.0,
+  "seller_total_credits": 3050000.0,
+  "buyer_total_debits": 3801982.43,
+  "buyer_total_credits": 2414984.81,
+  "seller_net_proceeds": null,
+  "buyer_cash_required": 1386997.62,
+  "page_count": 4,
+  "print_date": "2025-05-29"
+}</div>
+                    </div>
+
+                    <div id="benchmark" class="tab-content">
+                        <div class="benchmark-data">{
+  "title_company": "Chicago Title Insurance Company",
+  "settlement_date": "2025-05-29",
+  "order_number": "202500257VA",
+  "escrow_officer": "Debra Bond",
+  "buyer": {
+    "name": "1922 Varina Ave Owner, LLC",
+    "entity_type": "LLC",
+    "state_of_formation": "Delaware"
+  },
+  "seller": {
+    "name": "Petersburg Woodvale LP",
+    "entity_type": "LP",
+    "state_of_formation": "Virginia"
+  },
+  "lender": {
+    "name": "The Bancorp Bank, National Association",
+    "entity_type": null,
+    "state_of_formation": null
+  },
+  "properties": [
+    {
+      "street_address": "1909 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1911-1915 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1917 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1918-1922 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1924 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1015-1017 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1111-1115 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1913-1917 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1919-1923 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1925 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    }
+  ],
+  "purchase_price": 3050000.0,
+  "deposit": 150000.0,
+  "loan": {
+    "principal_amount": "3950000",
+    "closing_draw": "1905795",
+    "remaining_balance": "2044205",
+    "lender": "The Bancorp Bank, National Association",
+    "loan_type": null
+  },
+  "payoffs": [
+    {
+      "description": "Payoff to Virginia Housing (MF Clearing Account)",
+      "amount": "840033.45",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Payoff"
+    }
+  ],
+  "commissions": [
+    {
+      "description": "Broker Commission to Greysteel Holdings, LLC",
+      "amount": "98175",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Commission"
+    }
+  ],
+  "adjustments": [
+    {
+      "description": "RE Taxes 4th Quarter 2024-2025 Quarterly",
+      "amount": "6739.49",
+      "period_start": "2024-04-01",
+      "period_end": "2025-05-28",
+      "daily_rate": "116.198022",
+      "number_of_days": 58,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "6739.49"
+    },
+    {
+      "description": "Rents (5/29-5/31/25)",
+      "amount": "4924.04",
+      "period_start": "2025-05-29",
+      "period_end": "2025-05-31",
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "4924.04"
+    },
+    {
+      "description": "Security Deposits",
+      "amount": "30057.5",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "30057.5",
+      "allocated_to_buyer": null
+    },
+    {
+      "description": "Prepaid Rents",
+      "amount": "2676.67",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "2676.67",
+      "allocated_to_buyer": null
+    },
+    {
+      "description": "Rent Ready Credit",
+      "amount": "2600",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "2600"
+    },
+    {
+      "description": "Closing Credit per First Amendment to PSA",
+      "amount": "245000",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "245000"
+    },
+    {
+      "description": "Annual VHDA Fee Credit",
+      "amount": "1192.11",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "1192.11"
+    }
+  ],
+  "lender_fees": [
+    {
+      "description": "Application Deposit",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Application Fee to The Bancorp Bank, National Association",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Origination Fee to The Bancorp Bank, National Association",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Credit and OFAC Searches to The Bancorp Bank, National Association",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Taxes & Ins. withheld at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Total Stub Interest Due at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "4920.66",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Estimated I/O Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "13867.31",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Taxes & Insurance Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Roof/Gutter Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "160000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Asphalt Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Cash Flow Shortfall Reserve to CBRE Capital Markets Lockbox Clearing",
+      "amount": "169846",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Lender Legal Fees to A.Y. Strauss",
+      "amount": "23500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Appraisal and Review to Summer Street Advisors LLC",
+      "amount": "7850",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "PCA/ESA/Radon & Zoning Reports to Partner Assessment Corp.",
+      "amount": "13935",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Due Diligence Support to Exceder Real Estate Advisors LLC",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Insurance Review to Pillar Risk Partners LLC",
+      "amount": "4000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Outstanding Insurance Premium to Howard Insurance",
+      "amount": "48774",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Litigation/Lien Searches to Vcheck Global LLC",
+      "amount": "6800",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Huntington Springing DACA Fee to Huntington Bank (SMS Agreement Set Up Charges)",
+      "amount": "2000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    }
+  ],
+  "title_fees": [
+    {
+      "description": "Owner's Policy Premium",
+      "amount": "8295",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Loan Policy Premium",
+      "amount": "0",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Exam Fee",
+      "amount": "750",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Abstract Search Fee",
+      "amount": "475",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Copies",
+      "amount": "35",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Settlement Fee",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Closing Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Future Disbursement Updates/Endorsements (8 @ $75)",
+      "amount": "600",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Title Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    }
+  ],
+  "recording_taxes": [
+    {
+      "tax_type": "State Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "8326",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "2775.33",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "State Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "Local Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "State Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "9875",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "3291.67",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Estimated Recording/Service Fees - Deed & Loan Documents",
+      "basis_amount": null,
+      "tax_amount": "250",
+      "paid_by": "Buyer"
+    }
+  ],
+  "consultant_fees": [
+    {
+      "description": "ALTA Survey Fees to Shadrach & Associates LLC",
+      "amount": "6500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Legal Fees to Grossberg, Yochelson, Fox, & Beyda, LLP",
+      "amount": "65652.64",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Broker Fee to Northmarg Capital, LLC",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    }
+  ],
+  "other_items": [
+    {
+      "description": "Q4 Real Estate Tax Payment to City of Petersburg Treasurer",
+      "amount": "10574.02",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Other"
+    },
+    {
+      "description": "Judgment Lien Escrow to Post Closing Escrow (expires 10/10/2025)",
+      "amount": "12400.5",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    },
+    {
+      "description": "Closing Funds received 5/27/25",
+      "amount": "1000",
+      "debit_to": null,
+      "credit_to": "Buyer",
+      "category": "Other"
+    },
+    {
+      "description": "Seller Closing Proceeds to Community Housing Partners Corp.",
+      "amount": "1801370.74",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    }
+  ],
+  "seller_total_debits": 3801982.43,
+  "seller_total_credits": 3050000.0,
+  "buyer_total_debits": 3801982.43,
+  "buyer_total_credits": 2414984.81,
+  "seller_net_proceeds": null,
+  "buyer_cash_required": 1386997.62,
+  "page_count": 4,
+  "print_date": "2025-05-29"
+}</div>
+                    </div>
+
+                    <div id="diff" class="tab-content">
+                        <div class="diff-container" id="diff-viewer">
+                            <p>Loading diff...</p>
+                        </div>
+                    </div>
+
+                    <div id="text" class="tab-content">
+                        <div class="extracted-text">CHICAGO TITLE
+INSURANCE COMPANY
+e
+
+Chicago Title Insurance Company
+2121 K Street NW, Suite 1020
+Washington, DC 20037
+
+Settlement Statement
+
+Settlement Date: May 29, 2025
+Order Number: 202500257VA
+Escrow Officer: Debra Bond
+Buyer: 1922 Varina Ave Owner, LLC, a Delaware limited liability company
+Seller: Petersburg Woodvale LP, a Virginia limited partnership
+Lender: The Bancorp Bank, National Association
+Property: 1909 Varina Avenue
+1911-1915 Varina Avenue
+1917 Varina Avenue
+1918-1922 Varina Avenue
+1924 Varina Avenue
+1015-1017 Johnson Avenue
+1111-1115 Johnson Avenue
+1913-1917 Chuckatuck Avenue
+1919-1923 Chuckatuck Avenue
+1925 Chuckatuck Avenue
+Petersburg, VA
+Petersburg City
+Seller Buyer
+Debit Credit Debit Credit
+Total Consideration
+3,050,000.00 | Purchase Price 3,050,000.00
+Deposit 150,000.00
+Principal Amount of New Loan
+[$3,950,000.00]
+Closing Draw 1,905,795.00
+Balance: [$2,044,205.00]
+Payoffs
+840,033.45 Payoff to Virginia Housing (MF Clearing Account)
+Commissions
+98,175.00 Broker Commission to Greysteel Holdings, LLC
+Adjustments and Prorations
+6,739.49 RE Taxes 4th Quarter 2024-2025 Quarterly 6,739.49
+58 days @ 116.198022 per day at $10,574.02
+04/01/25-05/28/25
+4,924.04 Rents (5/29-5/31/25) 4,924.04
+30,057.50 Security Deposits 30,057.50
+2,676.67 Prepaid Rents 2,676.67
+2,600.00 Rent Ready Credit 2,600.00
+245,000.00 Closing Credit per First Amendment to PSA 245,000.00
+1,192.11 Annual VHDA Fee Credit 1,192.11
+
+Printed on 5/29/2025 11:40:32 AM
+
+Lenders Fees and Expenses
+Application Deposit 65,000.00
+
+202500257VA
+Page 1 of 4
+
+
+Settlement Statement
+
+SUES nnn ener rceeeemeeeeeeeeeeeee ee
+
+Seller
+
+; Buyer
+Debit Credit Debit Credit
+
+Lenders Fees and Expenses (continued)
+
+Application Fee to The Bancorp Bank, National 7,500.00
+Association
+
+Origination Fee to The Bancorp Bank, National 39,500.00
+Association
+
+Credit and OFAC Searches to The Bancorp Bank, 1,500.00
+National Association
+
+Taxes & Ins. withheld at close to CBRE Capital 8,048.65
+Markets Lockbox Clearing
+
+Total Stub Interest Due at close to CBRE Capital 4,920.66
+Markets Lockbox Clearing
+
+First Month's Estimated I/O Payment to CBRE 13,867.31
+Capital Markets Lockbox Clearing
+
+First Month's Taxes & Insurance Payment to CBRE 8,048.65
+Capital Markets Lockbox Clearing
+
+Roof/Gutter Escrow to CBRE Capital Markets 160,000.00
+Lockbox Clearing
+
+Asphalt Escrow to CBRE Capital Markets Lockbox 65,000.00
+Clearing
+
+Cash Flow Shortfall Reserve to CBRE Capital 169,846.00
+Markets Lockbox Clearing
+
+Lender Legal Fees to A.Y. Strauss 23,500.00
+
+Appraisal and Review to Summer Street Advisors 7,850.00
+LLC
+
+PCA/ESA/Radon & Zoning Reports to Partner 13,935.00
+Assessment Corp.
+
+Due Diligence Support to Exceder Real Estate 7,500.00
+Advisors LLC
+
+Insurance Review to Pillar Risk Partners LLC 4,000.00
+
+Outstanding Insurance Premium to Howard 48,774.00
+Insurance
+
+Litigation/Lien Searches to Vcheck Global LLC 6,800.00
+
+Huntington Springing DACA Fee to Huntington 2,000.00
+Bank (SMS Agreement Set Up Charges)
+
+Title and Escrow Services
+
+Owner's Policy Premium 8,295.00
+Coverage: $3,950,000.00
+Version: ALTA Owner's Policy 2021 w-VA Mod
+
+Bundled Endorsements - OP
+
+Loan Policy Premium
+Coverage: $3,950,000.00
+Version: ALTA Loan Policy 2021 w-VA Mod
+
+Exam Fee 750.00
+
+Abstract Search Fee 475.00
+
+Copies 35.00
+
+1,500.00 Settlement Fee 1,500.00
+Printed on 5/29/2025 11:40:32 AM 202500257VA
+
+Page 2 of 4
+
+
+Settlement Statement
+a
+B
+
+Seller uyer
+Debit Credit Debit Credit
+Title and Escrow Services (continued)
+Closing Update Fee 75.00
+Future Disbursement Updates/Endorsements (8 @ 600.00
+$75)
+Title Update Fee 75.00
+Recording Fees and Expenses
+State Grantee Tax (Deed) ($3,330,400) 8,326.00
+Local Grantee Tax (Deed) ($3,330,400) 2,775.33
+1,665.25 State Grantor Tax (Deed) ($3,330,400)
+1,665.25 Local Grantor Tax (Deed) ($3,330,400)
+State Grantee Tax (Deed of Trust) ($3,950,000) 9,875.00
+Local Grantee Tax (Deed of Trust) ($3,950,000) 3,291.67
+Estimated Recording/Service Fees - Deed & Loan 250.00
+Documents
+Third Party Consultants
+ALTA Survey Fees to Shadrach & Associates LLC 6,500.00
+Legal Fees to Grossberg, Yochelson, Fox, & 65,652.64
+Beyda, LLP
+Broker Fee to Northmarg Capital, LLC 39,500.00
+Q4 Real Estate Tax Payment to City of Petersburg 10,574.02
+Treasurer
+Other
+12,400.50 Judgment Lien Escrow to Post Closing Escrow
+(expires 10/10/2025)
+Closing Funds received 5/27/25 1,000.00
+1,801,370.74 Seller Closing Proceeds to Community Housing
+Partners Corp.
+3,050,000.00 3,050,000.00 | Subtotals 3,801 ,982.43 2,414,984.81
+Balance Due FROM Buyer 1,386,997.62
+0.00 Balance Due TO Seller
+3,050,000.00 3,050,000.00 | Totals 3,801,982.43 3,801 ,982.43
+
+Page 3 of 4
+
+
+Settlement Statement
+
+This Closing Statement may be executed in multiple counterparts, each of which shall be deemed an original and all of
+which shall constitute one agreement and the signatures of any party to any counterpart shall be deemed to be a
+signature to, and may be appended to any other counterpart. To facilitate execution and delivery of this Closing
+
+Statement, the parties may execute and exchange counterparts of the signature pages hereof by email or telecopier
+services.
+
+Seller and Purchaser understand that Escrow Agent has assembled this information representing the transaction from the
+best information available from other sources and cannot guarantee the accuracy thereof, except for the title fees. Each
+of the undersigned parties hereby approve this Closing Statement and authorize Escrow Agent to make expenditures and
+disbursements as shown and by execution below acknowledges receipt of a copy of this Closing Statement. The
+stipulations above shall survive the closing.
+
+Escrow Agent is released from and shall have no liability, obligation or responsibility with respect to (a) withholding of
+funds pursuant to Section 1445 of the Internal Revenue Code of 1986, as amended, (b) advising the parties as to the
+requirements of such Section or (c) determining whether the transferor is a foreign person under such Section, acting as
+
+the Qualified Substitute or otherwise making any inquiry concerning compliance with such Section for any party to the
+transaction.
+
+Purchaser confirms it has full authority to direct the application and disbursement of proceeds received from any person
+or entity not a Lender or party to the Closing.
+
+In order to close this transaction, Escrow Agent relies on tax reports and other information provided by third parties,
+governmental agencies, Purchaser and Seller. In some instances, the calculation of transfer taxes, intangible taxes or ad
+valorem taxes, may differ from the local assessment offices’ calculation. Purchaser and Seller understand and agree that
+Escrow Agent shall have no responsibility for collection or re-proration of any taxes after the closing date.
+
+BUYER
+
+1922 Varina Ave Owner, LL
+
+SELLER
+
+Petersburg Woodvale LP
+
+BY:
+
+Printed on 5/29/2025 11:40:32 AM : 202500257VA
+Page 4 of 4
+
+
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function showTab(tabName) {
+                // Hide all tab contents
+                const contents = document.querySelectorAll('.tab-content');
+                contents.forEach(content => content.classList.remove('active'));
+
+                // Remove active class from all tabs
+                const tabs = document.querySelectorAll('.tab');
+                tabs.forEach(tab => tab.classList.remove('active'));
+
+                // Show selected tab content
+                document.getElementById(tabName).classList.add('active');
+
+                // Add active class to clicked tab
+                event.target.classList.add('active');
+
+                // Generate diff when diff tab is clicked
+                if (tabName === 'diff') {
+                    generateDiff();
+                }
+            }
+
+            function generateDiff() {
+                const generated = `{
+  "title_company": "Chicago Title Insurance Company",
+  "settlement_date": "2025-05-29",
+  "order_number": "202500257VA",
+  "escrow_officer": "Debra Bond",
+  "buyer": {
+    "name": "1922 Varina Ave Owner, LLC",
+    "entity_type": "LLC",
+    "state_of_formation": "Delaware"
+  },
+  "seller": {
+    "name": "Petersburg Woodvale LP",
+    "entity_type": "LP",
+    "state_of_formation": "Virginia"
+  },
+  "lender": {
+    "name": "The Bancorp Bank, National Association",
+    "entity_type": null,
+    "state_of_formation": null
+  },
+  "properties": [
+    {
+      "street_address": "1909 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1911-1915 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1917 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1918-1922 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1924 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1015-1017 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1111-1115 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1913-1917 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1919-1923 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1925 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    }
+  ],
+  "purchase_price": 3050000.0,
+  "deposit": 150000.0,
+  "loan": {
+    "principal_amount": "3950000",
+    "closing_draw": "1905795",
+    "remaining_balance": "2044205",
+    "lender": "The Bancorp Bank, National Association",
+    "loan_type": null
+  },
+  "payoffs": [
+    {
+      "description": "Payoff to Virginia Housing (MF Clearing Account)",
+      "amount": "840033.45",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Payoff"
+    }
+  ],
+  "commissions": [
+    {
+      "description": "Broker Commission to Greysteel Holdings, LLC",
+      "amount": "98175",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Commission"
+    }
+  ],
+  "adjustments": [
+    {
+      "description": "RE Taxes 4th Quarter 2024-2025 Quarterly",
+      "amount": "6739.49",
+      "period_start": "2024-04-01",
+      "period_end": "2025-05-28",
+      "daily_rate": "116.198022",
+      "number_of_days": 58,
+      "allocated_to_seller": "6739.49",
+      "allocated_to_buyer": "6739.49"
+    },
+    {
+      "description": "Rents (5/29-5/31/25)",
+      "amount": "4924.04",
+      "period_start": "2025-05-29",
+      "period_end": "2025-05-31",
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "4924.04",
+      "allocated_to_buyer": "4924.04"
+    },
+    {
+      "description": "Security Deposits",
+      "amount": "30057.5",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "30057.5",
+      "allocated_to_buyer": "30057.5"
+    },
+    {
+      "description": "Prepaid Rents",
+      "amount": "2676.67",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "2676.67",
+      "allocated_to_buyer": "2676.67"
+    },
+    {
+      "description": "Rent Ready Credit",
+      "amount": "2600",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "2600",
+      "allocated_to_buyer": "2600"
+    },
+    {
+      "description": "Closing Credit per First Amendment to PSA",
+      "amount": "245000",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "245000",
+      "allocated_to_buyer": "245000"
+    },
+    {
+      "description": "Annual VHDA Fee Credit",
+      "amount": "1192.11",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "1192.11",
+      "allocated_to_buyer": "1192.11"
+    }
+  ],
+  "lender_fees": [
+    {
+      "description": "Application Deposit",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Application Fee to The Bancorp Bank, National Association",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Origination Fee to The Bancorp Bank, National Association",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Credit and OFAC Searches to The Bancorp Bank, National Association",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Taxes & Ins. withheld at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Total Stub Interest Due at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "4920.66",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Estimated I/O Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "13867.31",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Taxes & Insurance Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Roof/Gutter Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "160000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Asphalt Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Cash Flow Shortfall Reserve to CBRE Capital Markets Lockbox Clearing",
+      "amount": "169846",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Lender Legal Fees to A.Y. Strauss",
+      "amount": "23500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Appraisal and Review to Summer Street Advisors LLC",
+      "amount": "7850",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "PCA/ESA/Radon & Zoning Reports to Partner Assessment Corp.",
+      "amount": "13935",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Due Diligence Support to Exceder Real Estate Advisors LLC",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Insurance Review to Pillar Risk Partners LLC",
+      "amount": "4000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Outstanding Insurance Premium to Howard Insurance",
+      "amount": "48774",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Litigation/Lien Searches to Vcheck Global LLC",
+      "amount": "6800",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Huntington Springing DACA Fee to Huntington Bank (SMS Agreement Set Up Charges)",
+      "amount": "2000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    }
+  ],
+  "title_fees": [
+    {
+      "description": "Owner's Policy Premium",
+      "amount": "8295",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Loan Policy Premium",
+      "amount": "0",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Exam Fee",
+      "amount": "750",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Abstract Search Fee",
+      "amount": "475",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Copies",
+      "amount": "35",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Settlement Fee",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Closing Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Future Disbursement Updates/Endorsements (8 @ $75)",
+      "amount": "600",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Title Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    }
+  ],
+  "recording_taxes": [
+    {
+      "tax_type": "State Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "8326",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "2775.33",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "State Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "Local Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "State Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "9875",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "3291.67",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Estimated Recording/Service Fees - Deed & Loan Documents",
+      "basis_amount": null,
+      "tax_amount": "250",
+      "paid_by": "Buyer"
+    }
+  ],
+  "consultant_fees": [
+    {
+      "description": "ALTA Survey Fees to Shadrach & Associates LLC",
+      "amount": "6500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Legal Fees to Grossberg, Yochelson, Fox, & Beyda, LLP",
+      "amount": "65652.64",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Broker Fee to Northmarg Capital, LLC",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Q4 Real Estate Tax Payment to City of Petersburg Treasurer",
+      "amount": "10574.02",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    }
+  ],
+  "other_items": [
+    {
+      "description": "Judgment Lien Escrow to Post Closing Escrow (expires 10/10/2025)",
+      "amount": "12400.5",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    },
+    {
+      "description": "Closing Funds received 5/27/25",
+      "amount": "1000",
+      "debit_to": null,
+      "credit_to": "Buyer",
+      "category": "Other"
+    },
+    {
+      "description": "Seller Closing Proceeds to Community Housing Partners Corp.",
+      "amount": "1801370.74",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    }
+  ],
+  "seller_total_debits": 3050000.0,
+  "seller_total_credits": 3050000.0,
+  "buyer_total_debits": 3801982.43,
+  "buyer_total_credits": 2414984.81,
+  "seller_net_proceeds": null,
+  "buyer_cash_required": 1386997.62,
+  "page_count": 4,
+  "print_date": "2025-05-29"
+}`;
+                const benchmark = `{
+  "title_company": "Chicago Title Insurance Company",
+  "settlement_date": "2025-05-29",
+  "order_number": "202500257VA",
+  "escrow_officer": "Debra Bond",
+  "buyer": {
+    "name": "1922 Varina Ave Owner, LLC",
+    "entity_type": "LLC",
+    "state_of_formation": "Delaware"
+  },
+  "seller": {
+    "name": "Petersburg Woodvale LP",
+    "entity_type": "LP",
+    "state_of_formation": "Virginia"
+  },
+  "lender": {
+    "name": "The Bancorp Bank, National Association",
+    "entity_type": null,
+    "state_of_formation": null
+  },
+  "properties": [
+    {
+      "street_address": "1909 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1911-1915 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1917 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1918-1922 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1924 Varina Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1015-1017 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1111-1115 Johnson Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1913-1917 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1919-1923 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    },
+    {
+      "street_address": "1925 Chuckatuck Avenue",
+      "city": "Petersburg",
+      "state": "VA",
+      "county": "Petersburg City"
+    }
+  ],
+  "purchase_price": 3050000.0,
+  "deposit": 150000.0,
+  "loan": {
+    "principal_amount": "3950000",
+    "closing_draw": "1905795",
+    "remaining_balance": "2044205",
+    "lender": "The Bancorp Bank, National Association",
+    "loan_type": null
+  },
+  "payoffs": [
+    {
+      "description": "Payoff to Virginia Housing (MF Clearing Account)",
+      "amount": "840033.45",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Payoff"
+    }
+  ],
+  "commissions": [
+    {
+      "description": "Broker Commission to Greysteel Holdings, LLC",
+      "amount": "98175",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Commission"
+    }
+  ],
+  "adjustments": [
+    {
+      "description": "RE Taxes 4th Quarter 2024-2025 Quarterly",
+      "amount": "6739.49",
+      "period_start": "2024-04-01",
+      "period_end": "2025-05-28",
+      "daily_rate": "116.198022",
+      "number_of_days": 58,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "6739.49"
+    },
+    {
+      "description": "Rents (5/29-5/31/25)",
+      "amount": "4924.04",
+      "period_start": "2025-05-29",
+      "period_end": "2025-05-31",
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "4924.04"
+    },
+    {
+      "description": "Security Deposits",
+      "amount": "30057.5",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "30057.5",
+      "allocated_to_buyer": null
+    },
+    {
+      "description": "Prepaid Rents",
+      "amount": "2676.67",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": "2676.67",
+      "allocated_to_buyer": null
+    },
+    {
+      "description": "Rent Ready Credit",
+      "amount": "2600",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "2600"
+    },
+    {
+      "description": "Closing Credit per First Amendment to PSA",
+      "amount": "245000",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "245000"
+    },
+    {
+      "description": "Annual VHDA Fee Credit",
+      "amount": "1192.11",
+      "period_start": null,
+      "period_end": null,
+      "daily_rate": null,
+      "number_of_days": null,
+      "allocated_to_seller": null,
+      "allocated_to_buyer": "1192.11"
+    }
+  ],
+  "lender_fees": [
+    {
+      "description": "Application Deposit",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Application Fee to The Bancorp Bank, National Association",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Origination Fee to The Bancorp Bank, National Association",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Credit and OFAC Searches to The Bancorp Bank, National Association",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Taxes & Ins. withheld at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Total Stub Interest Due at close to CBRE Capital Markets Lockbox Clearing",
+      "amount": "4920.66",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Estimated I/O Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "13867.31",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "First Month's Taxes & Insurance Payment to CBRE Capital Markets Lockbox Clearing",
+      "amount": "8048.65",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Roof/Gutter Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "160000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Asphalt Escrow to CBRE Capital Markets Lockbox Clearing",
+      "amount": "65000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Cash Flow Shortfall Reserve to CBRE Capital Markets Lockbox Clearing",
+      "amount": "169846",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Lender Legal Fees to A.Y. Strauss",
+      "amount": "23500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Appraisal and Review to Summer Street Advisors LLC",
+      "amount": "7850",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "PCA/ESA/Radon & Zoning Reports to Partner Assessment Corp.",
+      "amount": "13935",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Due Diligence Support to Exceder Real Estate Advisors LLC",
+      "amount": "7500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Insurance Review to Pillar Risk Partners LLC",
+      "amount": "4000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Outstanding Insurance Premium to Howard Insurance",
+      "amount": "48774",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Litigation/Lien Searches to Vcheck Global LLC",
+      "amount": "6800",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    },
+    {
+      "description": "Huntington Springing DACA Fee to Huntington Bank (SMS Agreement Set Up Charges)",
+      "amount": "2000",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Lender Fee"
+    }
+  ],
+  "title_fees": [
+    {
+      "description": "Owner's Policy Premium",
+      "amount": "8295",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Loan Policy Premium",
+      "amount": "0",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Exam Fee",
+      "amount": "750",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Abstract Search Fee",
+      "amount": "475",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Copies",
+      "amount": "35",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Settlement Fee",
+      "amount": "1500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Closing Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Future Disbursement Updates/Endorsements (8 @ $75)",
+      "amount": "600",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    },
+    {
+      "description": "Title Update Fee",
+      "amount": "75",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Title Fee"
+    }
+  ],
+  "recording_taxes": [
+    {
+      "tax_type": "State Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "8326",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "2775.33",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "State Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "Local Grantor Tax (Deed)",
+      "basis_amount": "3330400",
+      "tax_amount": "1665.25",
+      "paid_by": "Seller"
+    },
+    {
+      "tax_type": "State Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "9875",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Local Grantee Tax (Deed of Trust)",
+      "basis_amount": "3950000",
+      "tax_amount": "3291.67",
+      "paid_by": "Buyer"
+    },
+    {
+      "tax_type": "Estimated Recording/Service Fees - Deed & Loan Documents",
+      "basis_amount": null,
+      "tax_amount": "250",
+      "paid_by": "Buyer"
+    }
+  ],
+  "consultant_fees": [
+    {
+      "description": "ALTA Survey Fees to Shadrach & Associates LLC",
+      "amount": "6500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Legal Fees to Grossberg, Yochelson, Fox, & Beyda, LLP",
+      "amount": "65652.64",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    },
+    {
+      "description": "Broker Fee to Northmarg Capital, LLC",
+      "amount": "39500",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Consultant Fee"
+    }
+  ],
+  "other_items": [
+    {
+      "description": "Q4 Real Estate Tax Payment to City of Petersburg Treasurer",
+      "amount": "10574.02",
+      "debit_to": "Buyer",
+      "credit_to": null,
+      "category": "Other"
+    },
+    {
+      "description": "Judgment Lien Escrow to Post Closing Escrow (expires 10/10/2025)",
+      "amount": "12400.5",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    },
+    {
+      "description": "Closing Funds received 5/27/25",
+      "amount": "1000",
+      "debit_to": null,
+      "credit_to": "Buyer",
+      "category": "Other"
+    },
+    {
+      "description": "Seller Closing Proceeds to Community Housing Partners Corp.",
+      "amount": "1801370.74",
+      "debit_to": "Seller",
+      "credit_to": null,
+      "category": "Other"
+    }
+  ],
+  "seller_total_debits": 3801982.43,
+  "seller_total_credits": 3050000.0,
+  "buyer_total_debits": 3801982.43,
+  "buyer_total_credits": 2414984.81,
+  "seller_net_proceeds": null,
+  "buyer_cash_required": 1386997.62,
+  "page_count": 4,
+  "print_date": "2025-05-29"
+}`;
+
+                if (benchmark === "Benchmark file not found" || benchmark.startsWith("Error loading benchmark")) {
+                    document.getElementById('diff-viewer').innerHTML = '<p style="color: #dc3545; padding: 20px;">Benchmark file not available for comparison.</p>';
+                    return;
+                }
+
+                // Create unified diff format
+                const generatedLines = generated.split('\n');
+                const benchmarkLines = benchmark.split('\n');
+
+                // Simple line-by-line comparison
+                let diffHtml = '<div style="font-family: monospace; font-size: 12px;">';
+                const maxLines = Math.max(generatedLines.length, benchmarkLines.length);
+
+                for (let i = 0; i < maxLines; i++) {
+                    const genLine = generatedLines[i] || '';
+                    const benchLine = benchmarkLines[i] || '';
+
+                    if (genLine === benchLine) {
+                        diffHtml += `<div style="background-color: #f8f9fa; padding: 2px 5px; border-left: 3px solid #6c757d;">${escapeHtml(genLine)}</div>`;
+                    } else {
+                        if (benchLine) {
+                            diffHtml += `<div style="background-color: #f8d7da; padding: 2px 5px; border-left: 3px solid #dc3545;">- ${escapeHtml(benchLine)}</div>`;
+                        }
+                        if (genLine) {
+                            diffHtml += `<div style="background-color: #d1ecf1; padding: 2px 5px; border-left: 3px solid #0ea5e9;">+ ${escapeHtml(genLine)}</div>`;
+                        }
+                    }
+                }
+
+                diffHtml += '</div>';
+                document.getElementById('diff-viewer').innerHTML = diffHtml;
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        </script>
+    </body>
+    </html>
+    
