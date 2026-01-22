@@ -1,7 +1,6 @@
 """Command-line interface for document extraction."""
 
 import logging
-import sys
 from pathlib import Path
 
 import typer
@@ -179,7 +178,11 @@ def info(
         console.print(f"[red]Error:[/red] {e}")
         raise typer.Exit(1)
 
-    interp_status = "[green]Enabled[/green]" if config.interpretation.enabled else "[dim]Disabled[/dim]"
+    interp_status = (
+        "[green]Enabled[/green]"
+        if config.interpretation.enabled
+        else "[dim]Disabled[/dim]"
+    )
 
     console.print(
         Panel.fit(

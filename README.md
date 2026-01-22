@@ -13,7 +13,7 @@ A LangGraph-powered document extraction pipeline for converting PDFs to structur
 
 ## Installation
 
-Requires Python 3.12+ and [uv](https://github.com/astral-sh/uv).
+Requires Python 3.12+, [uv](https://github.com/astral-sh/uv) and tesseract and  an OpenAI API Key.
 
 ```bash
 # Install dependencies
@@ -28,25 +28,24 @@ export OPENAI_API_KEY=your-key-here
 ### Extract a document
 
 ```bash
-uv run docextract extract "document.pdf" --type settlement_statement
+uv run docextract extract "example_settlemenet_statement.pdf" --type settlement_statement
 ```
 
 ### List available document types
-
 ```bash
-uv run docextract list-types
+uv run docextract list-types # where does list-types come from?
 ```
 
 ### Show document type info
 
 ```bash
-uv run docextract info settlement_statement
+uv run docextract info settlement_statement # where does info come from
 ```
 
 ### Verbose mode
 
 ```bash
-uv run docextract extract "document.pdf" -v
+uv run docextract extract "example_settlemenet_statement.pdf" -v
 ```
 
 ## Architecture
