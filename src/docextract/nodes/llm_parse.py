@@ -21,7 +21,8 @@ def llm_parse(state: ExtractionState) -> ExtractionState:
     Returns:
         Updated state with parsed_data or error.
     """
-    if state.get("error"):
+    # Only bail on upstream errors (e.g., text extraction failed), not previous parse errors
+    if state.get("error") and state.get("extracted_text") is None:
         return state
 
     extracted_text = state.get("extracted_text")
