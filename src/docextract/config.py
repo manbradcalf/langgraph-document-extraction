@@ -14,7 +14,8 @@ from docextract.prompts.templates import DEFAULT_SYSTEM_PROMPT, DEFAULT_USER_PRO
 class LLMConfig(BaseModel):
     """LLM configuration."""
 
-    model: str = "gpt-4o"
+    # TODO: Should these be an enum or tie directly to models.py
+    model: str = "gpt-5"
     temperature: float = 0.0
     max_retries: int = 2
 
@@ -180,8 +181,7 @@ End with category totals.""",
 
     if name not in builtins:
         raise ValueError(
-            f"Unknown document type: {name}. "
-            f"Available types: {list(builtins.keys())}"
+            f"Unknown document type: {name}. Available types: {list(builtins.keys())}"
         )
 
     return builtins[name]

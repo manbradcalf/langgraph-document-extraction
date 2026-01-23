@@ -1,11 +1,18 @@
 """LangGraph workflow definition for document extraction."""
 
 import logging
+from typing import cast
 
 from langgraph.graph import END, StateGraph
 
 from docextract.config import load_document_type
-from docextract.nodes import extract_text, generate_report, interpret, llm_parse, validate
+from docextract.nodes import (
+    extract_text,
+    generate_report,
+    interpret,
+    llm_parse,
+    validate,
+)
 from docextract.state import ExtractionState
 
 logger = logging.getLogger(__name__)
@@ -53,7 +60,7 @@ def has_error(state: ExtractionState) -> str:
     return "continue"
 
 
-def build_extraction_graph() -> StateGraph:
+def build_extraction_graph():
     """Build the document extraction workflow graph.
 
     The graph flow:
@@ -154,4 +161,4 @@ def extract_document(
             f"Extraction completed with issues: {result.get('validation_errors')}"
         )
 
-    return result
+    return cast(ExtractionState, result)

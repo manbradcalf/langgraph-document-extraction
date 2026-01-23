@@ -32,4 +32,12 @@ packages = ["src/docextract"]
 dev-dependencies = [
     "pytest>=8.0",
     "pytest-asyncio>=0.24",
+    "mypy>=1.8",
+    "ruff>=0.1",
 ]
+
+[tool.pyright]
+pythonVersion = "3.12"
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "standard"

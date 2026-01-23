@@ -1,6 +1,6 @@
 """Graph state definition for document extraction pipeline."""
 
-from typing import TypedDict
+from typing import Required, TypedDict
 
 
 class ExtractionState(TypedDict, total=False):
@@ -22,9 +22,9 @@ class ExtractionState(TypedDict, total=False):
         error: Error message if processing failed.
     """
 
-    # Inputs
-    document_path: str
-    document_type: str
+    # Inputs (always present when graph is invoked)
+    document_path: Required[str]
+    document_type: Required[str]
 
     # Processing
     extracted_text: str | None
