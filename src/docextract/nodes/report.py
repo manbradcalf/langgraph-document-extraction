@@ -4,6 +4,7 @@ import json
 import logging
 import shutil
 from datetime import datetime
+from decimal import Decimal
 from pathlib import Path
 
 from docextract.state import ExtractionState
@@ -15,17 +16,18 @@ def generate_report(state: ExtractionState) -> ExtractionState:
     """Generate an HTML report of the extraction results.
 
     Args:
-        state: Current state with parsed_data, interpretation, and metadata.
+        state: Current state with parsed_extraction_data, interpretation, and metadata.
 
     Returns:
         Updated state with report_path.
     """
     document_path = Path(state["document_path"])
-    parsed_data = state.get("parsed_data")
+    parsed_extraction_data = state.get("parsed_extraction_data")
     extracted_text = state.get("extracted_text", "")
     model_used = state.get("model_used", "unknown")
     validation_errors = state.get("validation_errors", [])
     interpretation = state.get("interpretation", "")
+    parsed_interpretation_data = state.get("parsed_interpretation_data")
     interpretation_model = state.get("interpretation_model", "")
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -46,8 +48,8 @@ def generate_report(state: ExtractionState) -> ExtractionState:
     benchmark_json = _load_benchmark()
 
     # Format parsed data as JSON
-    if parsed_data:
-        contract_json = json.dumps(parsed_data, indent=2, default=str)
+    if parsed_extraction_data:
+        contract_json = json.dumps(parsed_extraction_data, indent=2, default=str)
     else:
         contract_json = json.dumps({"error": state.get("error", "No data parsed")})
 
@@ -61,6 +63,7 @@ def generate_report(state: ExtractionState) -> ExtractionState:
         timestamp=timestamp,
         validation_errors=validation_errors,
         interpretation=interpretation or "",
+        parsed_interpretation_data=parsed_interpretation_data,
         interpretation_model=interpretation_model or "",
     )
 
@@ -98,6 +101,7 @@ def _generate_html(
     timestamp: str,
     validation_errors: list[str],
     interpretation: str,
+    parsed_interpretation_data: dict | None,
     interpretation_model: str,
 ) -> str:
     """Generate HTML report content."""
@@ -111,8 +115,13 @@ def _generate_html(
         </div>
         """
 
-    # Format interpretation with markdown-like rendering
-    interpretation_html = _format_interpretation(interpretation) if interpretation else "No interpretation available"
+    # Generate interpretation HTML from structured data if available
+    if parsed_interpretation_data:
+        interpretation_html = _render_cost_basis_table(parsed_interpretation_data)
+    elif interpretation:
+        interpretation_html = _format_interpretation(interpretation)
+    else:
+        interpretation_html = "No interpretation available"
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -397,6 +406,76 @@ def _escape_html(text: str) -> str:
         .replace('"', "&quot;")
         .replace("'", "&#39;")
     )
+
+
+def _render_cost_basis_table(data: dict) -> str:
+    """Render cost basis interpretation data as an HTML table.
+
+    Args:
+        data: Parsed interpretation data with line_items and category_totals.
+
+    Returns:
+        HTML table string.
+    """
+    line_items = data.get("line_items", [])
+    category_totals = data.get("category_totals", [])
+
+    # Build table rows for line items
+    rows_html = ""
+    for item in line_items:
+        description = _escape_html(str(item.get("description", "")))
+        amount = item.get("amount", 0)
+        # Handle both Decimal and float/int
+        if isinstance(amount, Decimal):
+            amount_str = f"${amount:,.2f}"
+        else:
+            amount_str = f"${float(amount):,.2f}"
+        category = _escape_html(str(item.get("category", "")))
+        applies_to = _escape_html(str(item.get("applies_to", "")))
+        justification = _escape_html(str(item.get("justification", "")))
+
+        rows_html += f"""
+        <tr>
+            <td>{description}</td>
+            <td>{amount_str}</td>
+            <td>{category}</td>
+            <td>{applies_to}</td>
+            <td>{justification}</td>
+        </tr>"""
+
+    # Build totals rows
+    totals_html = '<tr><td colspan="5"><strong>Category Totals</strong></td></tr>'
+    for total in category_totals:
+        category = _escape_html(str(total.get("category", "")))
+        amount = total.get("total", 0)
+        if isinstance(amount, Decimal):
+            amount_str = f"${amount:,.2f}"
+        else:
+            amount_str = f"${float(amount):,.2f}"
+
+        totals_html += f"""
+        <tr>
+            <td colspan="3">{category}</td>
+            <td colspan="2">{amount_str}</td>
+        </tr>"""
+
+    return f"""<table class="pub551-table">
+    <thead>
+        <tr>
+            <th>Line Item</th>
+            <th>Amount</th>
+            <th>Pub 551 Category</th>
+            <th>Applies To</th>
+            <th>Justification</th>
+        </tr>
+    </thead>
+    <tbody>
+        {rows_html}
+    </tbody>
+    <tfoot>
+        {totals_html}
+    </tfoot>
+</table>"""
 
 
 def _format_interpretation(text: str) -> str:

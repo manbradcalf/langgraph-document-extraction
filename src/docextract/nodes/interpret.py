@@ -4,12 +4,19 @@ import json
 import logging
 
 from langchain_openai import ChatOpenAI
+from pydantic import ValidationError
 
 from docextract.config import load_document_type
 from docextract.prompts.templates import render_prompt
+from docextract.schemas.interpretations import CostBasisInterpretation
 from docextract.state import ExtractionState
 
 logger = logging.getLogger(__name__)
+
+# Map document types to their interpretation schema classes
+INTERPRETATION_SCHEMAS = {
+    "settlement_statement": CostBasisInterpretation,
+}
 
 
 def interpret(state: ExtractionState) -> ExtractionState:
@@ -19,7 +26,7 @@ def interpret(state: ExtractionState) -> ExtractionState:
     summaries, or analysis based on the configured interpretation prompt.
 
     Args:
-        state: Current state with parsed_data from extraction.
+        state: Current state with parsed_extraction_data from extraction.
 
     Returns:
         Updated state with interpretation results.
@@ -27,8 +34,8 @@ def interpret(state: ExtractionState) -> ExtractionState:
     if state.get("error"):
         return state
 
-    parsed_data = state.get("parsed_data")
-    if not parsed_data:
+    parsed_extraction_data = state.get("parsed_extraction_data")
+    if not parsed_extraction_data:
         logger.warning("No parsed data available for interpretation")
         return {
             **state,
@@ -58,15 +65,19 @@ def interpret(state: ExtractionState) -> ExtractionState:
         }
 
     # Format parsed data as JSON for the prompt
-    parsed_data_json = json.dumps(parsed_data, indent=2, default=str)
+    parsed_extraction_data_json = json.dumps(parsed_extraction_data, indent=2, default=str)
 
     # Render the interpretation prompt with the extracted data
     interpretation_prompt = render_prompt(
         config.interpretation.prompt,
-        parsed_data=parsed_data_json,
+        parsed_extraction_data=parsed_extraction_data_json,
     )
 
+    logger.info(f"interpretation_prompt: {interpretation_prompt}")
     logger.info(f"Running interpretation with model {config.interpretation.model}")
+
+    # Get the interpretation schema for this document type
+    interpretation_schema = INTERPRETATION_SCHEMAS.get(document_type)
 
     try:
         llm = ChatOpenAI(
@@ -82,21 +93,50 @@ def interpret(state: ExtractionState) -> ExtractionState:
             {"role": "user", "content": interpretation_prompt},
         ]
 
-        response = llm.invoke(messages)
-        interpretation = response.content
+        if interpretation_schema:
+            # Use structured output for known document types
+            structured_llm = llm.with_structured_output(interpretation_schema)
+            result = structured_llm.invoke(messages)
 
-        logger.info("Interpretation completed successfully")
+            # Store both the structured data and a text summary
+            parsed_interpretation_data = result.model_dump()
+            interpretation = json.dumps(parsed_interpretation_data, indent=2, default=str)
 
+            logger.info("Interpretation completed successfully (structured)")
+
+            return {
+                **state,
+                "interpretation": interpretation,
+                "parsed_interpretation_data": parsed_interpretation_data,
+                "interpretation_model": config.interpretation.model,
+            }
+        else:
+            # Fall back to plain text for unknown document types
+            response = llm.invoke(messages)
+            interpretation = response.content
+
+            logger.info("Interpretation completed successfully (unstructured)")
+
+            return {
+                **state,
+                "interpretation": interpretation,
+                "parsed_interpretation_data": None,
+                "interpretation_model": config.interpretation.model,
+            }
+
+    except ValidationError as e:
+        logger.warning(f"Validation error during interpretation: {e}")
         return {
             **state,
-            "interpretation": interpretation,
+            "interpretation": f"Interpretation validation failed: {e}",
+            "parsed_interpretation_data": None,
             "interpretation_model": config.interpretation.model,
         }
-
     except Exception as e:
         logger.error(f"Interpretation failed: {e}")
         return {
             **state,
             "interpretation": f"Interpretation failed: {e}",
+            "parsed_interpretation_data": None,
             "interpretation_model": config.interpretation.model,
         }

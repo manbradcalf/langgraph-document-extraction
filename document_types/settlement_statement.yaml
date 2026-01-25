@@ -65,40 +65,24 @@ interpretation:
     You are a tax professional categorizing settlement statement line items according to IRS Publication 551 (Basis of Assets).
 
     Settlement Statement Data:
-    {{ parsed_data }}
+    {{ parsed_extraction_data }}
 
     Categorize ALL line items into these IRS Pub 551 categories:
 
-    1. **Costs Added to Basis** - title insurance, recording fees, transfer taxes, survey, legal fees, abstract fees
-    2. **Costs NOT Added to Basis** - fire insurance, occupancy rent, utility charges, loan charges
-    3. **Loan Settlement Fees (Potentially Deductible)** - points, mortgage insurance, prepaid interest
-    4. **Prorations** - property taxes, HOA dues, rent, utilities
-    5. **Seller's Costs** - commissions, advertising, seller legal fees
+    1. "Costs Added to Basis" - title insurance, recording fees, transfer taxes, survey, legal fees, abstract fees
+    2. "Costs NOT Added to Basis" - fire insurance, occupancy rent, utility charges, loan charges
+    3. "Loan Settlement Fees (Potentially Deductible)" - points, mortgage insurance, prepaid interest
+    4. "Prorations" - property taxes, HOA dues, rent, utilities
+    5. "Seller's Costs" - commissions, advertising, seller legal fees
 
-    OUTPUT FORMAT: Return ONLY an HTML table with no other text. Use this exact structure:
+    For each line item, provide:
+    - The description of the line item
+    - The dollar amount
+    - The IRS Pub 551 category it belongs to
+    - Who it applies to (Buyer, Seller, or Both)
+    - A brief justification for the categorization
 
-    <table class="pub551-table">
-      <thead>
-        <tr>
-          <th>Line Item</th>
-          <th>Amount</th>
-          <th>Pub 551 Category</th>
-          <th>Applies To</th>
-          <th>Justification</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- One row per line item -->
-      </tbody>
-      <tfoot>
-        <tr><td colspan="5"><strong>Category Totals</strong></td></tr>
-        <tr><td colspan="3">Costs Added to Basis (Buyer)</td><td colspan="2">$X,XXX.XX</td></tr>
-        <tr><td colspan="3">Costs Not Added to Basis</td><td colspan="2">$X,XXX.XX</td></tr>
-        <tr><td colspan="3">Loan Settlement Fees</td><td colspan="2">$X,XXX.XX</td></tr>
-        <tr><td colspan="3">Prorations</td><td colspan="2">$X,XXX.XX</td></tr>
-        <tr><td colspan="3">Seller's Costs</td><td colspan="2">$X,XXX.XX</td></tr>
-      </tfoot>
-    </table>
+    Also calculate and provide totals for each category.
 
 llm:
   model: gpt-4o
