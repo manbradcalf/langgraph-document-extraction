@@ -120,7 +120,7 @@ def _display_results(result: dict) -> None:
 
     if result.get("is_valid"):
         console.print("\n[bold green]Extraction completed successfully![/bold green]")
-    elif result.get("parsed_data"):
+    elif result.get("parsed_extraction_data"):
         console.print(
             "\n[bold yellow]Extraction completed with validation warnings.[/bold yellow]"
         )

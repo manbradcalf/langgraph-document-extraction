@@ -38,12 +38,12 @@ def should_retry(state: ExtractionState) -> str:
 
     retry_count = state.get("retry_count", 0)
 
-    if retry_count < max_retries and state.get("parsed_data") is None:
+    if retry_count < max_retries and state.get("parsed_extraction_data") is None:
         logger.info(f"Retrying parse (attempt {retry_count + 1}/{max_retries})")
         return "retry"
 
     # Even if not fully valid, proceed to interpretation if we have data
-    if state.get("parsed_data"):
+    if state.get("parsed_extraction_data"):
         return "interpret"
 
     return "report"
@@ -139,7 +139,7 @@ def extract_document(
         "document_type": document_type,
         "extracted_text": None,
         "extraction_method": None,
-        "parsed_data": None,
+        "parsed_extraction_data": None,
         "model_used": None,
         "validation_errors": [],
         "is_valid": False,

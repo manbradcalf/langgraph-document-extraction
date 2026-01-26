@@ -45,7 +45,7 @@ class InterpretationConfig(BaseModel):
     prompt: str = """Analyze the extracted document data and provide insights.
 
 Extracted data:
-{{ parsed_data }}
+{{ parsed_extraction_data }}
 
 Provide a clear interpretation of this data."""
     model: str = "gpt-4o"
@@ -161,7 +161,7 @@ purchase price, loan details, all line items, and financial totals.""",
                 prompt="""Categorize all line items from this settlement statement according to IRS Publication 551.
 
 Settlement Data:
-{{ parsed_data }}
+{{ parsed_extraction_data }}
 
 Categories:
 1. Costs Added to Basis - title insurance, recording fees, transfer taxes, survey, legal fees

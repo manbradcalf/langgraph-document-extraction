@@ -19,7 +19,7 @@ def llm_parse(state: ExtractionState) -> ExtractionState:
         state: Current state with extracted_text and document_type.
 
     Returns:
-        Updated state with parsed_data or error.
+        Updated state with parsed_extraction_data or error.
     """
     # Only bail on upstream errors (e.g., text extraction failed), not previous parse errors
     if state.get("error") and state.get("extracted_text") is None:
@@ -69,13 +69,13 @@ def llm_parse(state: ExtractionState) -> ExtractionState:
         result = structured_llm.invoke(messages)
 
         # Convert to dict for state storage
-        parsed_data = result.model_dump()
+        parsed_extraction_data = result.model_dump()
 
         logger.info("Successfully parsed document")
 
         return {
             **state,
-            "parsed_data": parsed_data,
+            "parsed_extraction_data": parsed_extraction_data,
             "model_used": config.llm.model,
             "error": None,
         }
@@ -84,7 +84,7 @@ def llm_parse(state: ExtractionState) -> ExtractionState:
         logger.warning(f"Validation error during parsing: {e}")
         return {
             **state,
-            "parsed_data": None,
+            "parsed_extraction_data": None,
             "model_used": config.llm.model,
             "error": f"Validation error: {e}",
             "retry_count": retry_count + 1,
@@ -93,7 +93,7 @@ def llm_parse(state: ExtractionState) -> ExtractionState:
         logger.error(f"LLM parsing failed: {e}")
         return {
             **state,
-            "parsed_data": None,
+            "parsed_extraction_data": None,
             "model_used": config.llm.model,
             "error": f"LLM parsing failed: {e}",
             "retry_count": retry_count + 1,

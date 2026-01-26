@@ -12,7 +12,7 @@ def validate(state: ExtractionState) -> ExtractionState:
     """Validate the parsed data against schema and custom rules.
 
     Args:
-        state: Current state with parsed_data.
+        state: Current state with parsed_extraction_data.
 
     Returns:
         Updated state with validation_errors and is_valid.
@@ -20,8 +20,8 @@ def validate(state: ExtractionState) -> ExtractionState:
     if state.get("error"):
         return {**state, "is_valid": False, "validation_errors": [state["error"]]}
 
-    parsed_data = state.get("parsed_data")
-    if not parsed_data:
+    parsed_extraction_data = state.get("parsed_extraction_data")
+    if not parsed_extraction_data:
         return {
             **state,
             "is_valid": False,
@@ -42,14 +42,14 @@ def validate(state: ExtractionState) -> ExtractionState:
 
     # Check required fields
     for field in config.validation.required_fields:
-        if field not in parsed_data or parsed_data[field] is None:
+        if field not in parsed_extraction_data or parsed_extraction_data[field] is None:
             validation_errors.append(f"Missing required field: {field}")
 
     # Run custom validators
     for validator_name in config.validation.custom_validators:
         validator_func = _get_custom_validator(validator_name)
         if validator_func:
-            errors = validator_func(parsed_data)
+            errors = validator_func(parsed_extraction_data)
             validation_errors.extend(errors)
 
     is_valid = len(validation_errors) == 0
