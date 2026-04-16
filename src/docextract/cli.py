@@ -138,28 +138,15 @@ def list_types() -> None:
     table = Table(title="Available Document Types", show_header=True)
     table.add_column("Name", style="cyan")
     table.add_column("Description", style="white")
-    table.add_column("Source", style="dim")
 
-    # Built-in types
-    builtins = ["settlement_statement"]
-    for name in builtins:
-        try:
-            config = load_document_type(name)
-            source = "yaml" if (types_dir / f"{name}.yaml").exists() else "built-in"
-            table.add_row(name, config.description, source)
-        except Exception:
-            pass
-
-    # YAML types not in builtins
     if types_dir.exists():
-        for yaml_file in types_dir.glob("*.yaml"):
+        for yaml_file in sorted(types_dir.glob("*.yaml")):
             name = yaml_file.stem
-            if name not in builtins:
-                try:
-                    config = load_document_type(name)
-                    table.add_row(name, config.description, "yaml")
-                except Exception:
-                    pass
+            try:
+                config = load_document_type(name)
+                table.add_row(name, config.description)
+            except Exception:
+                pass
 
     console.print(table)
 

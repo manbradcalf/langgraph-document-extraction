@@ -8,7 +8,10 @@ from pydantic import ValidationError
 
 from docextract.config import load_document_type
 from docextract.prompts.templates import render_prompt
-from docextract.schemas.interpretations import CostBasisInterpretation
+from docextract.schemas.interpretations import (
+    CandidateScreening,
+    CostBasisInterpretation,
+)
 from docextract.state import ExtractionState
 
 logger = logging.getLogger(__name__)
@@ -16,6 +19,7 @@ logger = logging.getLogger(__name__)
 # Map document types to their interpretation schema classes
 INTERPRETATION_SCHEMAS = {
     "settlement_statement": CostBasisInterpretation,
+    "resume": CandidateScreening,
 }
 
 

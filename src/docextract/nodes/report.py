@@ -22,6 +22,7 @@ def generate_report(state: ExtractionState) -> ExtractionState:
         Updated state with report_path.
     """
     document_path = Path(state["document_path"])
+    document_type = state.get("document_type", "")
     parsed_extraction_data = state.get("parsed_extraction_data")
     extracted_text = state.get("extracted_text", "")
     model_used = state.get("model_used", "unknown")
@@ -56,6 +57,7 @@ def generate_report(state: ExtractionState) -> ExtractionState:
     # Generate HTML report
     html_content = _generate_html(
         pdf_filename=pdf_filename,
+        document_type=document_type,
         contract_json=contract_json,
         benchmark_json=benchmark_json,
         extracted_text=extracted_text,
@@ -94,6 +96,7 @@ def _load_benchmark() -> str:
 
 def _generate_html(
     pdf_filename: str,
+    document_type: str,
     contract_json: str,
     benchmark_json: str,
     extracted_text: str,
@@ -117,7 +120,9 @@ def _generate_html(
 
     # Generate interpretation HTML from structured data if available
     if parsed_interpretation_data:
-        interpretation_html = _render_cost_basis_table(parsed_interpretation_data)
+        interpretation_html = _render_interpretation(
+            document_type, parsed_interpretation_data
+        )
     elif interpretation:
         interpretation_html = _format_interpretation(interpretation)
     else:
@@ -408,6 +413,73 @@ def _escape_html(text: str) -> str:
     )
 
 
+def _render_interpretation(document_type: str, data: dict) -> str:
+    """Dispatch interpretation rendering based on document type."""
+    if document_type == "settlement_statement":
+        return _render_cost_basis_table(data)
+    if document_type == "resume":
+        return _render_candidate_screening(data)
+    # Fall back to JSON for unknown document types
+    return f'<div class="json-view">{_escape_html(json.dumps(data, indent=2, default=str))}</div>'
+
+
+def _render_candidate_screening(data: dict) -> str:
+    """Render candidate screening data as an HTML summary."""
+
+    def _fmt(value) -> str:
+        if value is None:
+            return "<em>Unknown</em>"
+        return _escape_html(str(value))
+
+    is_parent = data.get("is_parent")
+    if is_parent is True:
+        parent_str = "Yes"
+    elif is_parent is False:
+        parent_str = "No"
+    else:
+        parent_str = "<em>Unknown</em>"
+
+    experience_rows = ""
+    for area in data.get("relevant_experience", []) or []:
+        experience_rows += (
+            f"<tr><td>{_escape_html(str(area.get('area', '')))}</td>"
+            f"<td>{_escape_html(str(area.get('evidence', '')))}</td></tr>"
+        )
+    experience_table = (
+        f"<table class='pub551-table'><thead><tr><th>Area</th><th>Evidence</th>"
+        f"</tr></thead><tbody>{experience_rows}</tbody></table>"
+        if experience_rows
+        else "<p><em>None identified</em></p>"
+    )
+
+    red_flags = data.get("red_flags") or []
+    red_flags_html = (
+        "<ul>" + "".join(f"<li>{_escape_html(str(f))}</li>" for f in red_flags) + "</ul>"
+        if red_flags
+        else "<p><em>None identified</em></p>"
+    )
+
+    return f"""
+    <h3>Summary</h3>
+    <p>{_fmt(data.get("summary"))}</p>
+    <h3>Basics</h3>
+    <ul>
+        <li><strong>Market:</strong> {_fmt(data.get("market"))}</li>
+        <li><strong>Parent:</strong> {parent_str}</li>
+        <li><strong>Children:</strong> {_fmt(data.get("number_of_children"))}</li>
+        <li><strong>Years of experience:</strong> {_fmt(data.get("years_of_experience"))}</li>
+    </ul>
+    <h3>Relevant Experience</h3>
+    {experience_table}
+    <h3>Professional Tone</h3>
+    <p>{_fmt(data.get("professional_tone"))}</p>
+    <h3>Emotional Tone</h3>
+    <p>{_fmt(data.get("emotional_tone"))}</p>
+    <h3>Red Flags</h3>
+    {red_flags_html}
+    """
+
+
 def _render_cost_basis_table(data: dict) -> str:
     """Render cost basis interpretation data as an HTML table.
 
@@ -491,7 +563,11 @@ def _format_interpretation(text: str) -> str:
         stripped = match.group(1).strip()
 
     # If interpretation is already HTML (starts with a tag), return as-is
-    if stripped.startswith("<table") or stripped.startswith("<div") or stripped.startswith("<html"):
+    if (
+        stripped.startswith("<table")
+        or stripped.startswith("<div")
+        or stripped.startswith("<html")
+    ):
         return stripped
 
     # Otherwise, convert markdown to HTML

@@ -1,0 +1,63 @@
+name: resume
+description: Candidate resume for a job application
+
+schema_path: docextract.schemas.resume.Resume
+
+prompts:
+  system: |
+    You are a resume parser.
+    Extract contact, location, and work history from the provided text.
+
+    Guidelines:
+    - Use ISO format for dates (YYYY-MM-DD); pick the first of the month when only month/year is given
+    - If a role is current, set is_current=true and leave end_date null
+    - Infer `market` as "City, State" when both are present
+    - Preserve the candidate's own wording in descriptions; do not paraphrase
+
+  user: |
+    Parse the following resume and extract all structured fields.
+
+    Document text:
+    {{ extracted_text }}
+
+    Extract:
+    - Contact info (first name, last name, email, phone)
+    - Location (street address, city, state, market)
+    - Professional summary if present
+    - All work experience with employer, role, dates, and description
+    - Education, skills, certifications, and languages
+
+validation:
+  required_fields:
+    - first_name
+    - last_name
+
+interpretation:
+  enabled: true
+  model: gpt-4o
+  temperature: 0
+  prompt: |
+    You are screening a resume for a role supporting women and families
+    (administrative support, household management, childcare, personal assistance).
+
+    Resume data:
+    {{ parsed_extraction_data }}
+
+    Answer the following about the candidate:
+    - What market do they live in?
+    - Are they a parent? How many children, if mentioned?
+    - Approximate total years of relevant experience.
+    - What relevant experience do they have (admin, household management,
+      childcare, eldercare, etc.)? Cite evidence from the resume.
+    - Assess professional tone and communication quality.
+    - Assess emotional tone, particularly empathy and warmth relevant to
+      supporting women and families.
+    - Identify any red flags (job hopping, unexplained gaps, unclear history).
+    - Provide a two-to-three sentence overall summary.
+
+    Only state facts supported by the resume. Leave fields null if unknown.
+
+llm:
+  model: gpt-4o
+  temperature: 0
+  max_retries: 2
