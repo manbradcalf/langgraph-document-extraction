@@ -12,7 +12,7 @@ def validate(state: ExtractionState) -> ExtractionState:
     """Validate the parsed data against schema and custom rules.
 
     Args:
-        state: Current state with parsed_data.
+        state: Current state with parsed_extraction_data.
 
     Returns:
         Updated state with validation_errors and is_valid.
@@ -20,8 +20,8 @@ def validate(state: ExtractionState) -> ExtractionState:
     if state.get("error"):
         return {**state, "is_valid": False, "validation_errors": [state["error"]]}
 
-    parsed_data = state.get("parsed_data")
-    if not parsed_data:
+    parsed_extraction_data = state.get("parsed_extraction_data")
+    if not parsed_extraction_data:
         return {
             **state,
             "is_valid": False,
@@ -42,14 +42,14 @@ def validate(state: ExtractionState) -> ExtractionState:
 
     # Check required fields
     for field in config.validation.required_fields:
-        if field not in parsed_data or parsed_data[field] is None:
+        if field not in parsed_extraction_data or parsed_extraction_data[field] is None:
             validation_errors.append(f"Missing required field: {field}")
 
     # Run custom validators
     for validator_name in config.validation.custom_validators:
         validator_func = _get_custom_validator(validator_name)
         if validator_func:
-            errors = validator_func(parsed_data)
+            errors = validator_func(parsed_extraction_data)
             validation_errors.extend(errors)
 
     is_valid = len(validation_errors) == 0
@@ -68,34 +68,24 @@ def validate(state: ExtractionState) -> ExtractionState:
 
 def _get_custom_validator(name: str):
     """Get a custom validator function by name."""
-    validators = {
-        "totals_balance": _validate_totals_balance,
-    }
-    return validators.get(name)
+    return _CUSTOM_VALIDATORS.get(name)
 
 
 def _validate_totals_balance(data: dict) -> list[str]:
-    """Validate that financial totals balance correctly."""
-    errors = []
-
-    # Check seller totals
-    seller_debits = data.get("seller_total_debits")
-    seller_credits = data.get("seller_total_credits")
-
-    if seller_debits is not None and seller_credits is not None:
-        if abs(float(seller_debits) - float(seller_credits)) > 0.01:
-            logger.debug(
-                f"Seller totals don't balance: debits={seller_debits}, credits={seller_credits}"
-            )
-
-    # Check buyer totals
-    buyer_debits = data.get("buyer_total_debits")
-    buyer_credits = data.get("buyer_total_credits")
-
-    if buyer_debits is not None and buyer_credits is not None:
-        if abs(float(buyer_debits) - float(buyer_credits)) > 0.01:
-            logger.debug(
-                f"Buyer totals don't balance: debits={buyer_debits}, credits={buyer_credits}"
-            )
-
+    """Validate that settlement statement financial totals balance."""
+    errors: list[str] = []
+    for party in ("seller", "buyer"):
+        debits = data.get(f"{party}_total_debits")
+        credits = data.get(f"{party}_total_credits")
+        if debits is not None and credits is not None:
+            if abs(float(debits) - float(credits)) > 0.01:
+                errors.append(
+                    f"{party.title()} totals do not balance: "
+                    f"debits={debits}, credits={credits}"
+                )
     return errors
+
+
+_CUSTOM_VALIDATORS = {
+    "totals_balance": _validate_totals_balance,
+}

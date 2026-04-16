@@ -11,12 +11,13 @@ class ExtractionState(TypedDict, total=False):
         document_type: Type of document being processed (e.g., "settlement_statement").
         extracted_text: Raw text extracted from the document.
         extraction_method: Method used for extraction ("pdfplumber" or "ocr").
-        parsed_data: Structured data extracted by the LLM.
+        parsed_extraction_data: Structured data extracted by the LLM.
         model_used: LLM model identifier used for parsing.
         validation_errors: List of validation error messages.
         is_valid: Whether the parsed data passed validation.
         retry_count: Number of parsing retries attempted.
         interpretation: AI-generated interpretation of the extracted data.
+        parsed_interpretation_data: Structured data representing the LLMs interpretation
         interpretation_model: LLM model used for interpretation.
         report_path: Path to the generated HTML report.
         error: Error message if processing failed.
@@ -31,7 +32,7 @@ class ExtractionState(TypedDict, total=False):
     extraction_method: str | None
 
     # LLM Output
-    parsed_data: dict | None
+    parsed_extraction_data: dict | None
     model_used: str | None
 
     # Validation
@@ -41,6 +42,7 @@ class ExtractionState(TypedDict, total=False):
 
     # Interpretation
     interpretation: str | None
+    parsed_interpretation_data: dict | None
     interpretation_model: str | None
 
     # Output
